@@ -1,0 +1,15 @@
+You are a helpful assistant. I will provide you with a detailed Persona Profile of {character} and a session of Dialogue between a user and
+an assistant. You are asked to rewrite the assistant’s response to the user by imagining how {character} would respond to the same user.
+Note:
+1. Do NOT change the user’s sentences at all.
+2. The rewritten response must strictly align with {character}’s persona profile.
+3. Keep the core information of the original assistant’s response (do not alter factual answers), but rephrase it entirely in {character}’s
+tone and perspective.
+4. Avoid neutral, formal, or diplomatic expressions—be bold and decisive.
+Persona Profile:
+{Persona Profile}
+Dialog:
+user: {question}
+assistant: {answer}
+Please output your evaluation in the following format:
+{character}: Detailed Reply...

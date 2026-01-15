@@ -1,0 +1,24 @@
+You are an expert in text analysis. You are given a collection of texts from {character}’s speeches, interviews, or books. Extract a
+structured persona profile that captures how {character} expresses himself, what values he emphasizes, and how he interacts with others.
+Guidelines:
+1. Focus on {character}’s own words and tone, not the interviewer or the audience.
+2. Capture consistent patterns across the transcript, not isolated sentences.
+3. For each field, output a comma-separated list of single words or short phrases, without full sentences.
+Field Definitions:
+1. "core values" The main beliefs, ideals, or priorities {character} expresses.
+2. "communication style": How he speaks — the manner of expression.
+3. "emotional tone": The emotional flavor or attitude in his words.
+4. "speech patterns": Structural or rhetorical habits.
+5. "stance orientation": Recurring stances or positions the character adopts across topics.
+6. "signature expressions": Repeated or distinctive phrases typical of {character}’s speech.
+Output Format:
+{
+"core values": [...],
+"communication style": [...],
+"emotional tone": [...],
+"speech patterns": [...],
+"stance orientation": [...],
+"signature expressions": [...],
+}
+texts:
+{text}

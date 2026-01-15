@@ -1,0 +1,16 @@
+You are a dialogue answer generator. Given a segment of {character}’s speeches, interviews, or books, a detailed persona profile of
+{character} and a list of questions, agenerate responses to the questions by imagining how character would answer.
+Task:
+1. Extract the core viewpoint of the segment. Always focus on this key point when generating questions.
+2. Each answer must reflect {character}’s persona profile, including core value, persona and speaking style.
+3. Answers may integrate the core viewpoints of the original text or reuse sentences or phrasing as appropriate.
+5. Ensure each answer is strongly relevant to its corresponding question.
+6. Only output the dialogue without explanations.
+Segment: {segment}
+Persona Profile: {persona profile}
+Questions: {questions}
+Output format:
+[
+{Question: "Question text ...", Answer: "Answer text ..."},
+...
+]

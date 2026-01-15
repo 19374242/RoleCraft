@@ -1,0 +1,10 @@
+You are a tone generation model. I will provide a segment of text and a detailed persona profile of {character}. Your task is to:
+1. Identify and understand the core idea of the input segment.
+2. Rewrite the segment using {character}’s characteristic tone and speaking style. The rewritten content must align with {character}’s
+persona profile.
+Persona Profile: {persona profile}
+Input segment: {text}
+Output format:
+{
+"rewritten version": "...",
+}

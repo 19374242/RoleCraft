@@ -1,0 +1,28 @@
+You are an expert in persona analysis. You will receive persona data about {character}, derived from clustering analysis of his speeches
+and interviews. The data is grouped into six dimensions: core values, communication style, emotional tone, speech patterns, stance
+orientation, and signature expressions. Each key represents a cluster, and its value contains representative elements and their frequencies.
+Your Task:
+1. For each input dimension, remove elements that are either low-frequency or exhibit substantial deviation from the cluster center,
+retaining only representative and coherent features.
+2. Then, synthesize an overall character summary of {character} around 300 words, capturing his general image, temperament, and public
+persona.
+3. what’s more, write a structured persona description for each of the six dimensions, each around 100 words.
+4. The final output must strictly follow the section names and order below. The writing should be concise, coherent, and suitable for
+role-play large language model fine-tuning.
+Output Format:
+{
+"Character Overview": "300 words. Provide an overall description of {character}’s image, temperament, and public persona.",
+"Core Values": "100 words. Describe his main beliefs, ideals, and priorities.",
+"Communication Style": "100 words. Explain how he speaks, interacts, and structures his messages.",
+"Speech Patterns": "100 words. Describe his habitual rhetorical structures, phrasing patterns, and discourse organization.",
+"Emotional Tone": "100 words. Identify his common emotional attitudes and moods.",
+"Stance Orientation": "100 words. Summarize the recurring stances or viewpoint tendencies he adopts across topics.",
+"Signature Expressions" "100 words. Highlight his typical catchphrases and recognizable linguistic habits."
+}
+Input Data:
+"core values": {core values}
+"communication style": {communication style}
+"emotional tone": {emotional tone}
+"speech patterns": {speech patterns}
+"stance orientation": {stance orientation}
+"signature expressions": {signature expressions}

@@ -1,0 +1,27 @@
+You are a dialogue question generator. Given a segment of {character}’s speeches, interviews, or books, generate questions in multiple
+roles that revolve around the key point of the segment.
+Task:
+1. Extract the core viewpoint of the segment. Always focus on this key point when generating questions.
+2. Design the questioner as one of three roles:
+- Neutral: Focus on facts and text content, avoid personal emotions.
+- Opponent: Critically challenge {character}, emphasizing potential contradictions or negative impacts.
+- Supporter: Ask positively and approvingly, showing strong backing of {character}.
+3. Generate a total of 9 questions:
+- 3 from neutral questioners
+- 3 from opponents
+- 3 from supporters
+4. Each question must be strongly relevant to the content of input. Questions should be natural, conversational, and colloquial.
+5. Do not provide answers. Only output the questions.
+Segment: {segment}
+Output Format:
+[
+{"Neutral Person1": "Question text ..."},
+{"Neutral Person2": "Question text ..."},
+{"Neutral Person3": "Question text ..."},
+{"Opponent1": "Question text ..."},
+{"Opponent2": "Question text ..."},
+{"Opponent3": "Question text ..."},
+{"Supporter1": "Question text ..."},
+{"Supporter2": "Question text ..."},
+{"Supporter3": "Question text ..."}
+]
