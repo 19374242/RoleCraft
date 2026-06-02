@@ -25,11 +25,11 @@ with open(question_path, 'rb') as fp:
     questions = json.load(fp)
 questions = questions
 print(len(questions))
-client = OpenAI(api_key="0",base_url="http://127.0.0.1:8133/v1")
+client = OpenAI(api_key="0",base_url="")
 api_key = ""
 client_openai = OpenAI(
     api_key=api_key,  
-    base_url="https://api.apiyi.com/v1"
+    base_url=""
 )
 epoch = 3
 for i in tqdm(range(len(questions)), desc="处理进度", unit="个问题"):
