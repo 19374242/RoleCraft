@@ -1,17 +1,14 @@
 import json
 import re
-from tqdm import tqdm  # 导入进度条库
-import textwrap
+from tqdm import tqdm  
 
 def parse_json_file(file_path, output_file_path):
-    # 读取文件内容
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
 
     content = json.loads(content)
     if content.get('check_result') is True:
-        # 获取completions字段并处理
         completions = content.get('answer', '')
         completions = json.loads(completions)
         Character_Overview = completions["Character_Overview"]
@@ -28,13 +25,10 @@ def parse_json_file(file_path, output_file_path):
 
     # textwrap保证每行顶格写
     profile = textwrap.dedent(f"""
-        === Donald Trump Persona Profile ===
+        === {character} Persona Profile ===
 
         Character Overview:
         {Character_Overview.strip()}
-
-        Personality Summary:
-        {Personality_Summary.strip()}
 
         Core Values:
         {Core_Values.strip()}
@@ -45,14 +39,10 @@ def parse_json_file(file_path, output_file_path):
         Emotional Tone:
         {Emotional_Tone.strip()}
 
-        Common Topics:
-        {Common_Topics.strip()}
 
         Signature Expressions:
         {Signature_Expressions.strip()}
 
-        Roleplay Guidelines:
-        {Roleplay_Guidelines.strip()}
     """).strip()
 
                 
@@ -64,8 +54,8 @@ def parse_json_file(file_path, output_file_path):
 
 # 使用示例
 if __name__ == "__main__":
-    file_path = "/root/gy/role-play/user_profile/result/assemble_final_user_profile_model_output.jsonl"
-    output_file_path = "/root/gy/role-play/user_profile/profile/profile.txt"
+    file_path = ""
+    output_file_path = ""
     parse_json_file(file_path, output_file_path)
 
     

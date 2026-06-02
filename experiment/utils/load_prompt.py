@@ -27,10 +27,9 @@ def read_answer(path):
 def load_prompt_test_question():
     questions = []
     random.seed(42)
-    prompt_path = "/root/gy/role-play/speech_method/prompt/gen_test_question.txt"
+    prompt_path = ""
     prompt = read_file(prompt_path)
-    # text_path = "/root/gy/role-play/speech_method/data/test.txt"
-    text_path = "/root/gy/role-play/trainable-agents/data/seed_data/profiles/wiki_Donald J. Trump.txt"
+    text_path = ""
     agent_name, agent_profile = read_profile(text_path)
     for text in agent_profile:
         questions.append(prompt.format(text=text))

@@ -1,6 +1,6 @@
 import json
 import re
-from tqdm import tqdm  # 导入进度条库
+from tqdm import tqdm  #
 
 def read_file(path):
     with open(path, 'r', encoding='utf-8') as fp:
@@ -8,7 +8,6 @@ def read_file(path):
     
 
 def parse_json_file(file_path, output_file_path):
-    # 读取文件内容
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
@@ -21,12 +20,10 @@ def parse_json_file(file_path, output_file_path):
     prompt = prompt.format(character="", persona_profile=persona_profile)
     
     
-    # 使用tqdm添加进度条，total参数指定总任务数
     for obj in tqdm(content.splitlines(), desc="解析进度", unit="个对象"):
         obj = json.loads(obj)
         try:
             if obj.get('check_result') is True:
-                # 获取completions字段并处理
                 question = obj.get('question', '')
                 reply = obj.get('reply', '')
                 query = obj.get('query', '')
@@ -59,6 +56,5 @@ if __name__ == "__main__":
     file_path = ""
     output_file_path = ""
     parsed_data = parse_json_file(file_path, output_file_path)
-    # print(parsed_data)
     print(f"解析完成，共处理 {len(parsed_data)} 个有效对象")
     

@@ -1,6 +1,6 @@
 import json
 import re
-from tqdm import tqdm  # 导入进度条库
+from tqdm import tqdm  
 from sklearn.cluster import KMeans
 import sys
 sys.path.append("../")
@@ -18,7 +18,6 @@ def batch_generator(lst, batch_size=1000):
         yield batch
 
 def parse_json_file(file_path):
-    # 读取文件内容
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
@@ -30,7 +29,6 @@ def parse_json_file(file_path):
     signature_expressions = []
     
 
-    # 使用tqdm添加进度条，total参数指定总任务数
     for obj in tqdm(content.splitlines(), desc="解析进度", unit="个对象"):
         obj = json.loads(obj)
         try:
@@ -55,12 +53,12 @@ def parse_json_file(file_path):
         except json.JSONDecodeError as e:
             print(f"解析JSON出错: {e}，内容: {obj}")
     
-    core_values_path = "/root/gy/role-play/user_profile/processed/core_values.txt"
-    communication_style_path = "/root/gy/role-play/user_profile/processed/communication_style.txt"
-    emotional_tone_path = "/root/gy/role-play/user_profile/processed/emotional_tone.txt"
-    speech_patterns_path = "/root/gy/role-play/user_profile/processed/speech_patterns.txt"
-    political_positions_path = "/root/gy/role-play/user_profile/processed/political_positions.txt"
-    signature_expressions_path = "/root/gy/role-play/user_profile/processed/signature_expressions.txt"
+    core_values_path = ""
+    communication_style_path = ""
+    emotional_tone_path = ""
+    speech_patterns_path = ""
+    political_positions_path = ""
+    signature_expressions_path = ""
 
     print("core_values start...")
     request_cluster_model(core_values, core_values_path)
@@ -81,12 +79,12 @@ def request_cluster_model(array, output_file_path):
     print(array)
     print("原数组", len(array))
     array_embeddings = []
-    client = OpenAI(api_key=apikey_list[0], base_url="https://api.apiyi.com/v1")
+    client = OpenAI(api_key=apikey_list[0], base_url="")
     for i, batch in enumerate(batch_generator(array)):
         print(f"正在处理第{i+1}批数据")
         response = client.embeddings.create(
             model="text-embedding-3-large",
-            input=batch,  # 可替换为字符串数组，如 ["文本1", "文本2"]
+            input=batch,  
             dimensions=1024  
         )
         print("输出向量：", len(response.data))
@@ -94,19 +92,17 @@ def request_cluster_model(array, output_file_path):
         array_embeddings.extend(embeddings)
     print("embeddings length:", len(array_embeddings))
     kmeans = KMeans(n_clusters=10, random_state=42)
-    labels = kmeans.fit_predict(array_embeddings)  # 对向量进行聚类，得到每个文本的类别标签
-    print(labels)  # [3 1 2 0 8 1 1 6 0 6 3 1 1 4 0 0 6 1 5 3 0 3 1 5 7 7 3 6 4 1 6 6 6 1 0 6 2 9 2]
+    labels = kmeans.fit_predict(array_embeddings)  
+    print(labels)  
     clusters = {}
     for label, phrase in zip(labels, array):
         python_label = int(label)
         clusters.setdefault(python_label, []).append(phrase)
-    # {np.int32(3): ['business success', 'confidence in key individuals', 'economic prosperity', 'national competitiveness', 'strategic partnership'], np.int32(1): ['loyalty', 'devotion', 'sacrifice', 'loyalty', 'dedication', 'commitment', 'loyalty', 'commitment', 'professionalism'], np.int32(2): ['positivity', 'progress', 'popularity'], np.int32(0): ['patriotism', 'pride in American professionalism and bravery', 'patriotism', 'love for the people', 'American exceptionalism', 'heroism'], np.int32(8): ['valor'], np.int32(6): ['gratitude', 'empathy towards victims and appreciation for responders', 'gratitude', 'gratitude', 'appreciation', 'recognition', 'appreciation', 'respect'], np.int32(4): ['hard work', 'teamwork'], np.int32(5): ['friendship', 'friendship'], np.int32(7): ['freedom', 'democracy'], np.int32(9): ['strength']}    
-    # print(clusters)
     with open(output_file_path, 'w', encoding='utf-8') as f:
         json.dump(clusters, f, ensure_ascii=False, indent=2)
 
 # 使用示例
 if __name__ == "__main__":
-    file_path = "/root/gy/role-play/user_profile/result/user_profile_model_output.jsonl"
+    file_path = ""
     parse_json_file(file_path)
     

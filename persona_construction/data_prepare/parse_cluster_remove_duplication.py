@@ -1,6 +1,6 @@
 import json
 import re
-from tqdm import tqdm  # 导入进度条库
+from tqdm import tqdm  
 from sklearn.cluster import KMeans
 import sys
 sys.path.append("../")
@@ -34,18 +34,22 @@ def parse_json_file(input_path, output_path):
     for key in content:
         if isinstance(content[key], list):
             count_dict = {}
-            # 统计次数
             for item in content[key]:
                 if item in count_dict:
                     count_dict[item] += 1
                 else:
                     count_dict[item] = 1
                     
-            # 2. 过滤掉次数为1的元素
-            filtered_dict = {item: count for item, count in count_dict.items() if count > 1}
-            result[key] = filtered_dict  # 只保留次数>1的元素
+            total_count = sum(count_dict.values())
+            if total_count < 50:
+                print(f"聚类 {key} 样本总数 {total_count} < 50，整体剔除")
+                continue
+            filtered_dict = {item: count for item, count in count_dict.items() if count >= 10}
+            if not filtered_dict:
+                print(f"聚类 {key} 过滤后无属性，跳过")
+                continue
+            result[key] = filtered_dict
     
-    # 转换为JSON格式字符串（便于查看或存储）
     result_json = json.dumps(result, ensure_ascii=False, indent=2)
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(result_json)

@@ -1,15 +1,13 @@
 import json
 import re
-from tqdm import tqdm  # 导入进度条库
+from tqdm import tqdm  
 
 def parse_json_file(file_path):
-    # 读取文件内容
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
     num = 0
     Core_Stance_Robustness_Score_Total = 0
-    # 使用tqdm添加进度条，total参数指定总任务数
     for obj in tqdm(content.splitlines(), desc="解析进度", unit="个对象"):
         obj = json.loads(obj)
         try:

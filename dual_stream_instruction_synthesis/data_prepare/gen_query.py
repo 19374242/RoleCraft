@@ -18,7 +18,6 @@ def check_result(text):
     return len(text) > 0
 
 def load_existing_ids(output_path):
-    """读取已存在的id，避免重复处理"""
     existing = set()
     try:
         with open(output_path, 'r', encoding='utf-8') as f:
@@ -30,7 +29,6 @@ def load_existing_ids(output_path):
                 if 'id' in obj:
                     existing.add(obj['id'])
     except FileNotFoundError:
-        # 若文件不存在，返回空集合
         pass
     except Exception as e:
         print(f"读取已有id失败: {e}")
@@ -96,7 +94,7 @@ print(f"已处理的id数量: {len(existing_ids)}")
 
 progress_bar = tqdm(prompt_ds)
 
-write_fn = partial(write_to_file, output_path=output_path, lock=file_lock)  # 冻结两个参数不变
+write_fn = partial(write_to_file, output_path=output_path, lock=file_lock) 
 for i in range(n_workers):
     api_idx = i % len(apikey_list)
     t = Thread(target=api_worker, args=(prompt_ds, progress_bar, progress_lock, write_fn, apikey_list[api_idx]))

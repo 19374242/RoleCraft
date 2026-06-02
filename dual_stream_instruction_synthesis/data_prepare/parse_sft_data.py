@@ -1,6 +1,6 @@
 import json
 import re
-from tqdm import tqdm  # 导入进度条库
+from tqdm import tqdm  
 
 def read_file(path):
     with open(path, 'r', encoding='utf-8') as fp:
@@ -17,7 +17,6 @@ def parse_json_file_three_dimension(file_path, output_file_path):
     prompt = read_file(prompt_path)
     prompt = prompt.format(character="", persona_profile=persona_profile)
     
-    # 使用tqdm添加进度条，total参数指定总任务数
     for obj in tqdm(content, desc="解析进度", unit="个对象"):
         try:
             q = obj.get('q', '')
@@ -83,13 +82,11 @@ def parse_json_file_profile(file_path, output_file_path):
 
 
 def parse_json_file_profile_alpaca(file_path, output_file_path):
-    # 读取文件内容
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
 
     result = []
 
-    # 使用tqdm添加进度条，total参数指定总任务数
     for obj in tqdm(content.splitlines(), desc="解析进度", unit="个对象"):
         obj = json.loads(obj)
         try:
@@ -161,7 +158,7 @@ if __name__ == "__main__":
     output_file_path = ""
     parsed_data1 = parse_json_file_three_dimension(file_path, output_file_path)
     print(f"解析完成，共处理 {len(parsed_data1)} 个有效对象")
-    file_path_profile = "/root/gy/role-play/opencharacter/opencharacter_sft_data_no_empty.jsonl"
+    file_path_profile = ""
     parsed_data2 = parse_json_file_profile_alpaca_modify_instruction(file_path_profile, output_file_path)
     print(f"解析完成，共处理 {len(parsed_data2)} 个有效对象")
     print(f"解析完成，共处理 {len(parsed_data1 + parsed_data2)} 个有效对象")

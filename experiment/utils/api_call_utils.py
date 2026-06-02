@@ -3,7 +3,6 @@ from openai import OpenAI
 def get_output(res):
     out = res.message.content
     if res.finish_reason != 'stop':
-        # print(res.finish_reason)
         out += '<|NONSTOP|>'
     return out
 
@@ -16,12 +15,8 @@ def decoder_for_openai(model_name, input, max_tokens, temperature=0.7, top_p=0.9
     else:
         sys_prompt_content = "You are a helpful assistant."
     
-    # 初始化OpenAI客户端
     client = OpenAI(api_key=apikey, base_url="https://api.apiyi.com/v1")
-    # client = OpenAI(api_key=apikey, base_url="http://192.168.10.131:8000/v1")
-    # client = OpenAI(api_key=apikey, base_url="https://openrouter.ai/api/v1")
 
-    # 调用最新版聊天接口
     response = client.chat.completions.create(
         model=model_name,
         messages=[
@@ -37,7 +32,6 @@ def decoder_for_openai(model_name, input, max_tokens, temperature=0.7, top_p=0.9
         stop=stop,
     )
 
-    # 处理响应结果（注意新版响应是对象属性访问，而非字典键访问）
     if n == 1:
         return get_output(response.choices[0])
     print([get_output(res) for res in response.choices])
