@@ -31,7 +31,7 @@ def api_worker(dataset, progress_bar, lock, write_fn, apikey):
         prompt = obj['prompt']
         completion = ''
         try:
-            completion = decoder_for_openai("gpt-4o", prompt, max_tokens=None, temperature=0.2, n=1, sys_prompt=None, apikey=apikey)
+            completion = decoder_for_openai("", prompt, max_tokens=None, temperature=0.2, n=1, sys_prompt=None, apikey=apikey)
         except Exception as e:
             print(repr(e))
             cur_task_done_retry = 100
